@@ -63,8 +63,20 @@ int fee(struct node** head_ref, char exxit[]){
 	return fee;
 }
 
+void curr(struct node** head_ref){
+	struct node* temp = *head_ref;
+	if (*head_ref == NULL) {
+        return;
+    } else {
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+}
+	printf("\t\t\tExiting Vehicle Details: \n\t\t\tVehicle Type: %s\n\t\t\tVehicle Number: %s\n\t\t\tEntry point for this vehicle is: %s ", temp->vtype, temp->vnumber, temp->entry);
+}
+
 int main() {
-	printf("\t\t\t\t\tNICE ROAD TOLL FEE COLLECTION SYSTEM\n");
+	printf("\n\n\t\t\t\t\t\t~~~~~NICE ROAD TOLL FEE COLLECTION SYSTEM~~~~\n\n");
     struct node* head = NULL;
     int choice;
     char type[6], number[11], en_try[4], exxit[4];
@@ -72,18 +84,18 @@ int main() {
     file = fopen("contents.txt", "w");
     int vv = 1;
     while (1) {
-        printf("1. Vehicle enter\n");
-        printf("2. Vehicle exit\n");
-        printf("3. Exit program\n");
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
+        printf("\t\t1. Vehicle enter\n");
+        printf("\t\t2. Vehicle exit\n");
+        printf("\t\t3. Exit program\n\n");
+        printf("\t\tEnter your choice: \n");
+        printf("\t\t\t");scanf("%d", &choice);printf("\n");
         switch(choice) {
             case 1:
-                printf("Enter vehicle type, entry direction and vehicle number: ");
-                scanf("%s", type);
-		    fprintf(file, "%d\tVehicle type: %s\t\n", vv, type);
-		    int valid1 = 1;
-                if (strlen(type) > 4) {
+                printf("\t\t\tEnter vehicle type, entry direction and vehicle number: \n");
+                printf("\t\t\t\t");scanf("%s", type);printf("\n");
+		    	fprintf(file, "%d\tVehicle type: %s\t\n", vv, type);
+		    	int valid1 = 1;
+                if (strlen(type) > 6) {
                 valid1 = 0;
                 }
                 for (int i = 0; i < strlen(type); i++) {
@@ -93,12 +105,12 @@ int main() {
                 }
                 }
                 if (!valid1) {
-                printf("Invalid type of vehicle\n");
+                printf("\n\t\t\t\t\t!!!!! Invalid type of vehicle !!!!!\n");
                 break;
-                }	
-		    scanf("%s", en_try);
-		    fprintf(file, "%d\tEntry point: %s\t\n", vv, en_try);
-		    int valid2 = 1;
+                }
+				printf("\t\t\t\t");scanf("%s", en_try);printf("\n");
+		    	fprintf(file, "%d\tEntry point: %s\t\n", vv, en_try);
+		    	int valid2 = 1;
                 if (strlen(en_try) > 4) {
                 valid2 = 0;
                 }
@@ -109,11 +121,11 @@ int main() {
                 }
                 }
                 if (!valid2) {
-                printf("Invalid Entry point. Please enter only among BNR, ELC, KPR, MYS, TMR.\n");
+                printf("\t\t\t\t\t!!!!! Invalid Entry point. Please enter only among BNR, ELC, KPR, MYS, TMR. !!!!!\n");
                 break;
-                }		
-		    scanf("%s", number);
-		    fprintf(file, "%d\tVehicle number: %s\t\n", vv, number);
+                }	
+		    	printf("\t\t\t\t");scanf("%s", number);printf("\n");
+		    	fprintf(file, "%d\tVehicle number: %s\t\n", vv, number);
                 int valid = 1;
                 if (strlen(number) > 10) {
                 valid = 0;
@@ -125,14 +137,15 @@ int main() {
                 }
                 }
                 if (!valid) {
-                printf("Invalid number\n");
+                printf("\t\t\t\t!!!!! Invalid number !!!!!\n");
                 break;
                 }
                 insertFront(&head, type, number, en_try);
                 break;
             case 2:
-		    printf("\nEnter the exit point\n");
-		    scanf("%s", exxit);
+		    curr(&head);
+			printf("\n\t\t\tEnter the exit point: \n");
+		    printf("\t\t\t\t");scanf("%s", exxit);printf("\n");
 		    int valid3 = 1;
                 if (strlen(exxit) > 4) {
                 valid3 = 0;
@@ -144,20 +157,21 @@ int main() {
                 }
                 }
                 if (!valid3) {
-                printf("Invalid Exit point. Please exit only among BNR, ELC, KPR, MYS, TMR. Make sure to input an exit point that is different than your 			    entry point\n");
+                printf("\t\t\t\t !!!!! Invalid Exit point. Please exit only among BNR, ELC, KPR, MYS, TMR. Make sure to input an exit point that is different than your entry point !!!!!\n");
                 break;
                 }		
-		    printf("\nThe fee is: %d\n", fee(&head, exxit));
+		    printf("\n\n\t\t\tThe fee is: %d\n\n", fee(&head, exxit));
 		    fprintf(file, "%d\tExit point: %s\t\n", vv, exxit);
                 deleteRear(&head);
                 break;
             case 3:
                 exit(0);
             default:
-                printf("Invalid choice.\n");
+                printf("\t\t\t\t !!! Invalid choice !!!\n");
         }
     vv++;
 	}
    fclose(file);
    return 0;
 }
+
