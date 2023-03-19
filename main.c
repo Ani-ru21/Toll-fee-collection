@@ -58,7 +58,7 @@ int fee(struct node** head_ref, char exxit[]){
             temp = temp->next;
         }
 }
-	int a = abs(strcmp(exxit, temp->entry));
+	int a = abs(strncmp(exxit, temp->entry, 1));
 	int fee = a*10;
 	return fee;
 }
